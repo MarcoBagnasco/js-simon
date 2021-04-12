@@ -7,6 +7,7 @@
 body{
     padding: 20px;
     text-align: center;
+    background-color: antiquewhite;
 }
 h1{
     font-size: 6rem;
@@ -39,22 +40,31 @@ h2{
     outline: none;
     cursor: pointer;
 }
-.btn:hover,
+.btn:not([disabled="disabled"]):hover,
 .btn:focus{
     background-color: #888;
+}
+.btn[disabled="disabled"]:hover{
+    cursor: not-allowed;
+}
+.btn.btn-user{
+    display: block;
+    margin: 10px auto;
 }
 
 /* APP MAIN */
 /* Numbers */
 .numbers .box,
-.user input[type="number"]{
-    display: flex;
+.user .user-num
+{
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     margin: 5px;
     width: 60px;
     height: 60px;
     font-size: 2rem;
+    background-color: #fff;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -69,13 +79,21 @@ h2{
 }
 
 /* User Numbers */
-.user input[type="number"]{
+.user .user-num{
+    text-align: center;
     border: 0;
 }
-.user input[type="number"]:disabled{
+.user .user-num:disabled{
     color: #000;
 }
-
+.user .user-num::-webkit-inner-spin-button, 
+.user .user-num::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.user .user-num:out-of-range{
+    background-color: yellow;
+}
 .user-num.correct{
     background-color: rgb(16, 100, 16);
 }

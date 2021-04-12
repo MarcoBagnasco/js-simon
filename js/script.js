@@ -73,13 +73,20 @@ $(document).ready(function() {
                     if(!userNumbers.includes(parseInt($(this).val()))){
                         userNumbers.push(parseInt($(this).val()));
                     }
+                    // Check if respect the range
+                    if (!this.validity.valid){
+                        userNumbers.pop();
+                        userNumbers.push(-1);
+                    }
                 });
 
                 //Check validity of userNumbers
-                if(userNumbers.includes(NaN)){
+                if(userNumbers.includes(NaN)){ // Check if is empty
                     alert('Please enter all the numbers');
-                } else if (userNumbers.length < numOfNumbers){
-                    alert('Please not enter same numbers')
+                } else if (userNumbers.length < numOfNumbers){ //Check if is repet
+                    alert('Please not enter equal numbers')
+                } else if(userNumbers.includes(-1)){ //Check if is out of range
+                    alert('Please enter number between 1 and 100')
                 } else {
                     check = true;
                     user.each(function() {
@@ -100,13 +107,13 @@ $(document).ready(function() {
                     for(var i = 0; i < numbers.length; i++){
                         box.eq(i).text(numbers[i]);
                     }
+
+                    btnUser.attr('disabled', true);
+
                 }
             });
-                
-        }, speed);
-            
+        }, speed);       
     });
-
 
     //End Doc Ready
 });
