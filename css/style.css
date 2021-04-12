@@ -100,3 +100,8 @@ h2{
 .user-num.uncorrect{
     background-color: rgb(167, 20, 20);
 }
+
+/* Congratulations */
+.cong{
+    display: none;
+}

@@ -6,10 +6,12 @@ $(document).ready(function() {
        - Dopo 30 secondi l'utente deve inserire, uno alla volta, i numeri che ha visto precedentemente, tramite il prompt().
        - Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati.
     ****************************************************************/
+   //VARIABLES
     var numOfNumbers = 5;
     var numbers = [];
-    var speed = 1000;
+    var speed = 30000;
     var seconds = (speed / 1000) - 1;
+
     //Generate random numbers
     fillArray(numbers, numOfNumbers);
     
@@ -21,6 +23,7 @@ $(document).ready(function() {
     var btnRef = $('.btn-refresh');
     var timer = $('.timer');
     var input = $('.input-field');
+    var cong = $('.cong');
 
     // Refresh page
     btnRef.click(function() {
@@ -32,9 +35,10 @@ $(document).ready(function() {
         box.eq(i).text(numbers[i]);
     }
 
-    //Button to hide and start timer
+    //Button to hide numbers and start timer
     btn.click(function(){
         
+        //Disabled got it button
         btn.attr('disabled', true);
 
         // Hide numbers
@@ -57,12 +61,12 @@ $(document).ready(function() {
         
         //Timer
         setTimeout(function(){
-            // guessNum(numbers, numOfNumbers);
+            //Show user input
             input.show();
             
-
             var userNumbers = [];
             
+            //Click on check button
             btnUser.click(function() {
                 var check = false; 
 
@@ -89,6 +93,7 @@ $(document).ready(function() {
                     alert('Please enter number between 1 and 100')
                 } else {
                     check = true;
+                    //Disabled input
                     user.each(function() {
                         $(this).attr('disabled', true);
                     });
@@ -96,6 +101,7 @@ $(document).ready(function() {
                 
                 //Result
                 if(check){
+                    // Add color class
                     for(var i = 0; i < userNumbers.length; i++){
                         if(numbers.includes(userNumbers[i])){
                             user.eq(i).addClass('correct');
@@ -104,12 +110,32 @@ $(document).ready(function() {
                         }
                     }
 
+                    // Show numbers
                     for(var i = 0; i < numbers.length; i++){
                         box.eq(i).text(numbers[i]);
                     }
 
+                    //Disabled check button
                     btnUser.attr('disabled', true);
 
+                    //Check Result
+                    var count = 0;
+                    
+                    for(var i = 0; i < numbers.length; i++){
+                        if(numbers.includes(userNumbers[i])){
+                            count++;
+                        }
+                    }
+                    // All numbers guessed
+                    if(count === numbers.length){
+                        cong.show();
+                        confetti({
+                            particleCount: 2000,
+                            spread: 180,
+                            gravity: .4,
+                            ticks: 500
+                        });
+                    }
                 }
             });
         }, speed);       
