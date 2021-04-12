@@ -9,11 +9,13 @@ $(document).ready(function() {
 
     //End Doc Ready
 });
+    var numOfNumbers = 5;
     var numbers = [];
     var userNumbers = [];
+    var guessedNumbers = [];
     
     //Generate five random numbers
-    while(numbers.length < 5){
+    while(numbers.length < numOfNumbers){
         var num = randNum();
 
         if(!numbers.includes(num)){
@@ -23,10 +25,11 @@ $(document).ready(function() {
     //Alert
     alert('Remember these numbers\n' + numbers);
 
+    //Timer
     setTimeout(function(){
         alert('Enter the numbers you remember');
         
-        while(userNumbers.length < 5){
+        while(userNumbers.length < numOfNumbers){
             var num = parseInt(prompt('Enter a number').trim());
             while(isNaN(num)){
                 num = parseInt(prompt('This is not a number!\nEnter a number'));
@@ -38,8 +41,16 @@ $(document).ready(function() {
                 alert('Number already entered!')
             }
         }
-        console.log(userNumbers);//test
-    }, 5000);
+
+        //Result
+        for(var i = 0; i < userNumbers.length; i++){
+            if(numbers.includes(userNumbers[i])){
+                guessedNumbers.push(userNumbers[i]);
+            }
+        }
+        alert('You guessed ' + guessedNumbers.length + ' out of ' + numOfNumbers + ' numbers\n' + guessedNumbers);
+    }, 2000);
+
 
 
 /* *************
