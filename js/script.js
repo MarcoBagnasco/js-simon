@@ -11,16 +11,18 @@ $(document).ready(function() {
 
     //Generate random numbers
     fillArray(numbers, numOfNumbers);
-
- 
-    
-    
     
     // REFERENCES
     var box = $('.box');
     var btn = $('.btn-got');
     var user = $('.user-num');
     var btnUser = $('.btn-user');
+    var btnRef = $('.btn-refresh');
+
+    // Refresh page
+    btnRef.click(function() {
+        location.reload();
+    });
 
     //Print random numbers
     for(var i = 0; i < numbers.length; i++){
@@ -29,26 +31,61 @@ $(document).ready(function() {
 
     //Button to hide and start timer
     btn.click(function(){
+        
+        btn.attr('disabled', true);
         box.each(function(){
             $(this).text('*');
         });
-
+        
         //Timer
         setTimeout(function(){
             // guessNum(numbers, numOfNumbers);
+            
             var userNumbers = [];
-            var guessedNumbers = [];
-
+            
             btnUser.click(function() {
-                userNumbers.splice(0, userNumbers.length);
-                user.each(function() {
-                    userNumbers.push(parseInt($(this).val()));
-                });
-                console.log(userNumbers);
-            });
+                var check = false; 
 
+                //Clear userNumbers
+                userNumbers.splice(0, userNumbers.length);
+                //Fill userNumbers
+                user.each(function() {
+                    if(!userNumbers.includes(parseInt($(this).val()))){
+                        userNumbers.push(parseInt($(this).val()));
+                    }
+                });
+
+                //Check validity of userNumbers
+                if(userNumbers.includes(NaN)){
+                    alert('Please enter all the numbers');
+                } else if (userNumbers.length < numOfNumbers){
+                    alert('Please not enter same numbers')
+                } else {
+                    check = true;
+                    user.each(function() {
+                        $(this).attr('disabled', true);
+                    });
+                }
+                
+                //Result
+                if(check){
+                    for(var i = 0; i < userNumbers.length; i++){
+                        if(numbers.includes(userNumbers[i])){
+                            user.eq(i).addClass('correct');
+                        } else {
+                            user.eq(i).addClass('uncorrect');
+                        }
+                    }
+
+                    for(var i = 0; i < numbers.length; i++){
+                        box.eq(i).text(numbers[i]);
+                    }
+                }
+            });
+                
         }, 2000);
-    })
+            
+    });
 
 
     //End Doc Ready
