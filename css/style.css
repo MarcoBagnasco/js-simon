@@ -17,14 +17,22 @@ h2{
     margin-bottom: 30px;
 }
 
-/* APP MAIN */
-/* Numbers */
-.numbers{
+/* UTILITIES */
+/* Flexbox */
+.flex{
     display: flex;
-    justify-content: center;
+}
+.ai-center{
     align-items: center;
 }
-.numbers .box{
+.jc-center{
+    justify-content: center;
+}
+
+/* APP MAIN */
+/* Numbers */
+.numbers .box,
+.user input[type="number"]{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,4 +56,9 @@ h2{
 .btn:hover,
 .btn:focus{
     background-color: #888;
+}
+
+/* User Numbers */
+.user input[type="number"]{
+    border: 0;
 }

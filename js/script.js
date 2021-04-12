@@ -12,29 +12,44 @@ $(document).ready(function() {
     //Generate random numbers
     fillArray(numbers, numOfNumbers);
 
-    //Alert
-    // alert('Remember these numbers\n' + numbers);
-
+ 
+    
+    
+    
     // REFERENCES
     var box = $('.box');
-    var btn = $('.btn');
+    var btn = $('.btn-got');
+    var user = $('.user-num');
+    var btnUser = $('.btn-user');
 
     //Print random numbers
     for(var i = 0; i < numbers.length; i++){
         box.eq(i).text(numbers[i]);
     }
 
-    //Button to hide
+    //Button to hide and start timer
     btn.click(function(){
         box.each(function(){
             $(this).text('*');
-        })
+        });
+
+        //Timer
+        setTimeout(function(){
+            // guessNum(numbers, numOfNumbers);
+            var userNumbers = [];
+            var guessedNumbers = [];
+
+            btnUser.click(function() {
+                userNumbers.splice(0, userNumbers.length);
+                user.each(function() {
+                    userNumbers.push(parseInt($(this).val()));
+                });
+                console.log(userNumbers);
+            });
+
+        }, 2000);
     })
 
-    //Timer
-    setTimeout(function(){
-        guessNum(numbers, numOfNumbers);
-    }, 10000);
 
     //End Doc Ready
 });
