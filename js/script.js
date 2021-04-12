@@ -13,12 +13,28 @@ $(document).ready(function() {
     fillArray(numbers, numOfNumbers);
 
     //Alert
-    alert('Remember these numbers\n' + numbers);
+    // alert('Remember these numbers\n' + numbers);
+
+    // REFERENCES
+    var box = $('.box');
+    var btn = $('.btn');
+
+    //Print random numbers
+    for(var i = 0; i < numbers.length; i++){
+        box.eq(i).text(numbers[i]);
+    }
+
+    //Button to hide
+    btn.click(function(){
+        box.each(function(){
+            $(this).text('*');
+        })
+    })
 
     //Timer
     setTimeout(function(){
         guessNum(numbers, numOfNumbers);
-    }, 2000);
+    }, 10000);
 
     //End Doc Ready
 });
