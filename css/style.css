@@ -29,20 +29,6 @@ h2{
     justify-content: center;
 }
 
-/* APP MAIN */
-/* Numbers */
-.numbers .box,
-.user input[type="number"]{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5px;
-    width: 60px;
-    height: 60px;
-    font-size: 2rem;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
 /* Button */
 .btn{
     margin: 10px;
@@ -58,6 +44,30 @@ h2{
     background-color: #888;
 }
 
+/* APP MAIN */
+/* Numbers */
+.numbers .box,
+.user input[type="number"]{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Timer */
+.timer{
+    font-size: 3.5rem;
+}
+
+/* Input Field */
+.input-field{
+    display: none;
+}
+
 /* User Numbers */
 .user input[type="number"]{
     border: 0;
@@ -66,10 +76,9 @@ h2{
     color: #000;
 }
 
-
-.correct{
+.user-num.correct{
     background-color: rgb(16, 100, 16);
 }
-.uncorrect{
+.user-num.uncorrect{
     background-color: rgb(167, 20, 20);
 }

@@ -8,7 +8,8 @@ $(document).ready(function() {
     ****************************************************************/
     var numOfNumbers = 5;
     var numbers = [];
-
+    var speed = 1000;
+    var seconds = (speed / 1000) - 1;
     //Generate random numbers
     fillArray(numbers, numOfNumbers);
     
@@ -18,6 +19,8 @@ $(document).ready(function() {
     var user = $('.user-num');
     var btnUser = $('.btn-user');
     var btnRef = $('.btn-refresh');
+    var timer = $('.timer');
+    var input = $('.input-field');
 
     // Refresh page
     btnRef.click(function() {
@@ -33,14 +36,31 @@ $(document).ready(function() {
     btn.click(function(){
         
         btn.attr('disabled', true);
+
+        // Hide numbers
         box.each(function(){
             $(this).text('*');
         });
         
+        // Countdown
+        timer.text(seconds + 1);
+        var interval = setInterval(function(){
+
+            if (seconds === 0){
+                clearInterval(interval);
+                timer.text('');
+            } else {
+                timer.text(seconds);
+                seconds--;
+            }
+        }, 1000);
+        
         //Timer
         setTimeout(function(){
             // guessNum(numbers, numOfNumbers);
+            input.show();
             
+
             var userNumbers = [];
             
             btnUser.click(function() {
@@ -83,7 +103,7 @@ $(document).ready(function() {
                 }
             });
                 
-        }, 2000);
+        }, speed);
             
     });
 
