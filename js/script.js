@@ -10,6 +10,7 @@ $(document).ready(function() {
     //End Doc Ready
 });
     var numbers = [];
+    var userNumbers = [];
     
     //Generate five random numbers
     while(numbers.length < 5){
@@ -22,9 +23,25 @@ $(document).ready(function() {
     //Alert
     alert('Remember these numbers\n' + numbers);
 
+    setTimeout(function(){
+        alert('Enter the numbers you remember');
+        
+        while(userNumbers.length < 5){
+            var num = parseInt(prompt('Enter a number').trim());
+            while(isNaN(num)){
+                num = parseInt(prompt('This is not a number!\nEnter a number'));
+            }
+
+            if(!userNumbers.includes(num)){
+                userNumbers.push(num);
+            } else {
+                alert('Number already entered!')
+            }
+        }
+        console.log(userNumbers);//test
+    }, 5000);
 
 
-    
 /* *************
 * FUNCTIONS
 ************ */
