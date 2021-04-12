@@ -6,52 +6,22 @@ $(document).ready(function() {
        - Dopo 30 secondi l'utente deve inserire, uno alla volta, i numeri che ha visto precedentemente, tramite il prompt().
        - Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati.
     ****************************************************************/
-
-    //End Doc Ready
-});
     var numOfNumbers = 5;
     var numbers = [];
-    var userNumbers = [];
-    var guessedNumbers = [];
-    
-    //Generate five random numbers
-    while(numbers.length < numOfNumbers){
-        var num = randNum();
 
-        if(!numbers.includes(num)){
-            numbers.push(num);
-        }
-    }
+    //Generate random numbers
+    fillArray(numbers, numOfNumbers);
+
     //Alert
     alert('Remember these numbers\n' + numbers);
 
     //Timer
     setTimeout(function(){
-        alert('Enter the numbers you remember');
-        
-        while(userNumbers.length < numOfNumbers){
-            var num = parseInt(prompt('Enter a number').trim());
-            while(isNaN(num)){
-                num = parseInt(prompt('This is not a number!\nEnter a number'));
-            }
-
-            if(!userNumbers.includes(num)){
-                userNumbers.push(num);
-            } else {
-                alert('Number already entered!')
-            }
-        }
-
-        //Result
-        for(var i = 0; i < userNumbers.length; i++){
-            if(numbers.includes(userNumbers[i])){
-                guessedNumbers.push(userNumbers[i]);
-            }
-        }
-        alert('You guessed ' + guessedNumbers.length + ' out of ' + numOfNumbers + ' numbers\n' + guessedNumbers);
+        guessNum(numbers, numOfNumbers);
     }, 2000);
 
-
+    //End Doc Ready
+});
 
 /* *************
 * FUNCTIONS
@@ -62,4 +32,53 @@ $(document).ready(function() {
  */
 function randNum(){
     return Math.floor(Math.random() * 100 + 1);
+}
+
+/**
+ * Populate an array with random numbers
+ * @param {array} numArray array of numbers
+ * @param {number} length length of array
+ */
+function fillArray(numArray, length){
+    while(numArray.length < length){
+        var num = randNum();
+
+        if(!numArray.includes(num)){
+            numArray.push(num);
+        }
+    }
+}
+
+/**
+ * Guess numbers from array
+ * @param {array} numArray array of numbers
+ * @param {number} length length of array
+ */
+function guessNum(numArray, length){
+    alert('Enter the numbers you remember');
+        
+    var userNumbers = [];
+    var guessedNumbers = [];
+    
+    //Enter Numbers
+    while(userNumbers.length < length){
+        var num = parseInt(prompt('Enter a number').trim());
+        while(isNaN(num)){
+            num = parseInt(prompt('This is not a number!\nEnter a number'));
+        }
+
+        if(!userNumbers.includes(num)){
+            userNumbers.push(num);
+        } else {
+            alert('Number already entered!')
+        }
+    }
+
+    //Result
+    for(var i = 0; i < userNumbers.length; i++){
+        if(numArray.includes(userNumbers[i])){
+            guessedNumbers.push(userNumbers[i]);
+        }
+    }
+    alert('You guessed ' + guessedNumbers.length + ' out of ' + length + ' numbers\n' + guessedNumbers);
 }
